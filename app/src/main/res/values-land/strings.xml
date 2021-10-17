@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_notification_channel_id">fcm_morning</string>
+    <string name="fcm_message">message constanta value</string>
+    <string name="default_notification_channel_name">fcm_morning_name</string>
+    <string name="subscribe_to_weather">subscribe to weather</string>
+    <string name="msg_subscribed">messaging_subscribed</string>
+    <string name="msg_subscribe_failed">messaging_subscribed_failed</string>
+    <string name="msg_token_fmt">messaging token fmt %s</string>
+</resources>

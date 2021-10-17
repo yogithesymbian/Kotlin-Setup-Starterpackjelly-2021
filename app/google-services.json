@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "364839005563",
+    "firebase_url": "https://project-5566467322804966315.firebaseio.com",
+    "project_id": "project-5566467322804966315",
+    "storage_bucket": "project-5566467322804966315.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364839005563:android:8c7fc73ed981bc36f121de",
+        "android_client_info": {
+          "package_name": "id.itborneo.bacasuara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364839005563-89nriq02q11l4aikl4eujeb302ch2fln.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.itborneo.bacasuara",
+            "certificate_hash": "fd163cf112b82d9442721f72f778aa4d20c6d2fd"
+          }
+        },
+        {
+          "client_id": "364839005563-f9t47g4kc0c62k976fh0iqovejuf5b85.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.itborneo.bacasuara",
+            "certificate_hash": "39430b01b7560b3664a4778d47af136c56adf8fd"
+          }
+        },
+        {
+          "client_id": "364839005563-fqm17e1obv9ebo9jb8fbdvokqpu3bhkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVJgaNnfVuWV52PfjnmedR6cWs8hrs7oY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364839005563-fqm17e1obv9ebo9jb8fbdvokqpu3bhkt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "364839005563-f42q4lciat58cnj93elbnq4srrlu984d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.helloWorld"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364839005563:android:daa201aaf30c3da1f121de",
+        "android_client_info": {
+          "package_name": "id.scodeid.kotlin_setup_starterpackjelly2021"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364839005563-9n2nv7llvkq0kn7dn5drm7529f4lej6o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.scodeid.kotlin_setup_starterpackjelly2021",
+            "certificate_hash": "1d5e2b3d120da98e7e06c3a77e2b0b16fd0b3e0c"
+          }
+        },
+        {
+          "client_id": "364839005563-fqm17e1obv9ebo9jb8fbdvokqpu3bhkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVJgaNnfVuWV52PfjnmedR6cWs8hrs7oY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364839005563-fqm17e1obv9ebo9jb8fbdvokqpu3bhkt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "364839005563-f42q4lciat58cnj93elbnq4srrlu984d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.helloWorld"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

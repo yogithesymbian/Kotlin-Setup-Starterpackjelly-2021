@@ -9,4 +9,12 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="default_notification_channel_id">fcm_morning</string>
+    <string name="fcm_message">message constanta value</string>
+    <string name="default_notification_channel_name">fcm_morning_name</string>
+    <string name="subscribe_to_weather">subscribe to weather</string>
+    <string name="log_token">log token</string>
+    <string name="msg_subscribed">messaging_subscribed</string>
+    <string name="msg_subscribe_failed">messaging_subscribed_failed</string>
+    <string name="msg_token_fmt">messaging token fmt %s</string>
 </resources>
