@@ -6,16 +6,25 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import id.scodeid.kotlin_setup_starterpackjelly2021.MainActivity
 import id.scodeid.kotlin_setup_starterpackjelly2021.R
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.io.*
+import java.net.URL
+import javax.net.ssl.HttpsURLConnection
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -67,7 +76,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             Log.d(TAG, "Message Notification Body: ${it.body}")
         }
         try {
-            sendNotification(remoteMessage.notification?.body.toString())
+            sendNotification(remoteMessage.notification)
         } catch (e: Exception){
             Log.d(TAG, "sendNotification $e")
         }
@@ -129,10 +138,13 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      * @param messageBody FCM message body received.
      */
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun sendNotification(messageBody: String) {
+    private fun sendNotification(notification: RemoteMessage.Notification?) {
+
+        val androidImage = BitmapFactory.decodeResource(resources, R.drawable.img_micro)
+
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        intent.putExtra("message", "$messageBody")
+        intent.putExtra("message", "${notification?.body}")
         // add this:
         intent.action = "showmessage"
 
@@ -145,11 +157,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_notifications_active)
-            .setContentTitle(getString(R.string.fcm_message))
-            .setContentText(messageBody)
+            .setContentTitle(notification?.title)
+            .setContentText(notification?.body)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
+            .setStyle(NotificationCompat.BigPictureStyle()
+                .bigPicture(androidImage)
+                .setBigContentTitle("Large Notification Title"))
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -164,8 +179,78 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
     }
 
-    companion object {
+    fun subscribeTopic(context: Context, topic: String) {
+        FirebaseMessaging.getInstance().subscribeToTopic(topic).addOnSuccessListener {
+            Toast.makeText(context, "Subscribed $topic", Toast.LENGTH_LONG).show()
+        }.addOnFailureListener {
+            Toast.makeText(context, "Failed to Subscribe $topic", Toast.LENGTH_LONG).show()
+        }
+    }
 
+    fun unsubscribeTopic(context: Context, topic: String) {
+        FirebaseMessaging.getInstance().unsubscribeFromTopic(topic).addOnSuccessListener {
+            Toast.makeText(context, "Unsubscribed $topic", Toast.LENGTH_LONG).show()
+        }.addOnFailureListener {
+            Toast.makeText(context, "Failed to Unsubscribe $topic", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun sendMessage(title: String, content: String,topic: String) {
+        GlobalScope.launch {
+            val endpoint = "https://fcm.googleapis.com/fcm/send"
+            try {
+                val url = URL(endpoint)
+                val httpsURLConnection: HttpsURLConnection = url.openConnection() as HttpsURLConnection
+                httpsURLConnection.readTimeout = 10000
+                httpsURLConnection.connectTimeout = 15000
+                httpsURLConnection.requestMethod = "POST"
+                httpsURLConnection.doInput = true
+                httpsURLConnection.doOutput = true
+
+                // Adding the necessary headers
+                httpsURLConnection.setRequestProperty("authorization", "key=AAAAVPIZbXs:APA91bELTtDGzcRCId8luhrbotLHBPLs-0CTWbeIYlgTC6pSyQrRPumZ37gI4qc9D-GassRdl5tzyEvKcG9c_fcy4FPfntpyFZ-2t1766lhDnias_-N2osg3_CosoHEO_YC5YknNQD2t")
+                httpsURLConnection.setRequestProperty("Content-Type", "application/json")
+
+                // Creating the JSON with post params
+                val body = JSONObject()
+
+                val data = JSONObject()
+                data.put("title", title)
+                data.put("body", content)
+                body.put("notification",data)
+
+                body.put("to","/topics/$topic")
+
+                val outputStream: OutputStream = BufferedOutputStream(httpsURLConnection.outputStream)
+                val writer = BufferedWriter(OutputStreamWriter(outputStream, "utf-8"))
+                writer.write(body.toString())
+                writer.flush()
+                writer.close()
+                outputStream.close()
+                val responseCode: Int = httpsURLConnection.responseCode
+                val responseMessage: String = httpsURLConnection.responseMessage
+                Log.d("Response:", "$responseCode $responseMessage")
+                var result = String()
+                var inputStream: InputStream? = null
+                inputStream = if (responseCode in 400..499) {
+                    httpsURLConnection.errorStream
+                } else {
+                    httpsURLConnection.inputStream
+                }
+
+                if (responseCode == 200) {
+                    Log.e("Success:", "notification sent $title \n $content")
+                    // The details of the user can be obtained from the result variable in JSON format
+                } else {
+                    Log.e("Error", "Error Response")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    companion object {
         private const val TAG = "MyFirebaseMsgService"
     }
 }

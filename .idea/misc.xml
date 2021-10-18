@@ -7,7 +7,9 @@
         <entry key="app/src/main/res/layout-w936dp/activity_login.xml" value="0.1840277777777778" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.24537037037037038" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15572916666666667" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15572916666666667" />
       </map>
     </option>
   </component>

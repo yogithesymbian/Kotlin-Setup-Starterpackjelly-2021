@@ -14,18 +14,21 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import id.scodeid.kotlin_setup_starterpackjelly2021.databinding.ActivityMainBinding
+import id.scodeid.kotlin_setup_starterpackjelly2021.service.MyFirebaseMessagingService
 import id.scodeid.kotlin_setup_starterpackjelly2021.ui.auth.signin.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    val myFirebaseMessagingService = MyFirebaseMessagingService()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        Firebase.messaging.isAutoInitEnabled = true
+        Firebase.messaging.isAutoInitEnabled = true
 
 
         binding.txtHello.setOnClickListener {
@@ -68,22 +71,17 @@ class MainActivity : AppCompatActivity() {
         }
         // [END handle_data_extras]
 
-        binding.subscribeButton.setOnClickListener {
-            Log.d(TAG, "Subscribing to weather topic")
-            // [START subscribe_topics]
-            Firebase.messaging.subscribeToTopic("weather")
-                .addOnCompleteListener { task ->
-                    var msg = getString(R.string.msg_subscribed)
-                    if (!task.isSuccessful) {
-                        msg = getString(R.string.msg_subscribe_failed)
-                    }
-                    Log.d(TAG, msg)
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-                }
-            // [END subscribe_topics]
+        binding.btnSubscribe.setOnClickListener {
+            Log.d(TAG, "Subscribing to  ${binding.ipEdtSubscribe.text.toString()}")
+            myFirebaseMessagingService.subscribeTopic(applicationContext, binding.ipEdtSubscribe.text.toString())
         }
 
-        binding.logTokenButton.setOnClickListener {
+        binding.btnUnsubscribe.setOnClickListener{
+            Log.d(TAG, "UnSubscribing to  ${binding.ipEdtSubscribe.text.toString()}")
+            myFirebaseMessagingService.unsubscribeTopic(applicationContext, binding.ipEdtSubscribe.text.toString())
+        }
+
+        binding.btnLogToken.setOnClickListener {
             // Get token
             // [START log_reg_token]
             Firebase.messaging.token.addOnCompleteListener(OnCompleteListener { task ->
@@ -103,7 +101,9 @@ class MainActivity : AppCompatActivity() {
             // [END log_reg_token]
         }
 
-        Toast.makeText(this, "See README for setup instructions", Toast.LENGTH_SHORT).show()
+        binding.btnSentNotification.setOnClickListener {
+            myFirebaseMessagingService.sendMessage("title", binding.ipEdtMessage.text.toString(), binding.ipEdtSubscribe.text.toString())
+        }
     }
 
     private fun checkGooglePlayServices(): Boolean {
