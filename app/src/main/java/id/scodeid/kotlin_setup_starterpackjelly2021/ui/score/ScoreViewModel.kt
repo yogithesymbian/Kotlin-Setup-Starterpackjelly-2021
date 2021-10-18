@@ -88,7 +88,7 @@ class ScoreViewModel(val view: ScoreView) : ViewModel() {
                             Log.d(TAG_LOG,  "onError errorDetail : ${anError.errorDetail}")
 
                             if (anError.errorCode == "404".toInt())
-                                mutableList?.clear()
+                                mutableList.clear()
                             mutableLiveData.postValue(mutableList)
 
                             // if (anError?.errorCode == "404".toInt())

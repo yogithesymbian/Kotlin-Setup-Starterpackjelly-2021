@@ -1,6 +1,7 @@
 package id.scodeid.kotlin_setup_starterpackjelly2021.ui.score
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import kotlin.properties.Delegates
 import kotlinx.coroutines.*
 import id.scodeid.kotlin_setup_starterpackjelly2021.R
 import id.scodeid.kotlin_setup_starterpackjelly2021.data.network.response.score.ScoresItem
+import id.scodeid.kotlin_setup_starterpackjelly2021.ui.score.detail.ScoreDetailActivity
 import kotlinx.android.synthetic.main.fragment_score.*
 
 
@@ -51,6 +53,13 @@ class ScoreFragment : Fragment(), ScoreView {
 
         scoreAdapter = ScoreAdapter(mutableList) {
             Log.d(TAG_LOG, "clicked ${it.score}")
+            try {
+                val intent = Intent(requireContext(), ScoreDetailActivity::class.java)
+                intent.putExtra(ScoreDetailActivity.EXTRA_SCORE_DATA, it)
+                requireContext().startActivity(intent)
+            } catch (e: Exception) {
+                Log.d(TAG_LOG, "clicked $e")
+            }
         }
         initListenerScoreAdapter()
 

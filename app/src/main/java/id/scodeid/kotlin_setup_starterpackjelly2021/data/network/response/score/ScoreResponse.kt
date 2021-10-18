@@ -1,6 +1,9 @@
 package id.scodeid.kotlin_setup_starterpackjelly2021.data.network.response.score
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 data class ScoreResponse(
 
@@ -14,6 +17,7 @@ data class ScoreResponse(
 	val message: String? = null
 )
 
+@Parcelize
 data class ScoresItem(
 
 	@field:SerializedName("score")
@@ -32,14 +36,14 @@ data class ScoresItem(
 	val id: Int? = null,
 
 	@field:SerializedName("delete_flag")
-	val deleteFlag: Any? = null,
+	val deleteFlag: @RawValue Any? = null,
 
 	@field:SerializedName("question_id")
 	val questionId: Int? = null,
 
 	@field:SerializedName("user")
 	val user: User? = null
-)
+) : Parcelable
 
 data class Data(
 
@@ -47,13 +51,14 @@ data class Data(
 	val scores: MutableList<ScoresItem>
 )
 
+@Parcelize
 data class User(
 
 	@field:SerializedName("password")
 	val password: String? = null,
 
 	@field:SerializedName("hit")
-	val hit: Any? = null,
+	val hit: @RawValue Any? = null,
 
 	@field:SerializedName("updated_at")
 	val updatedAt: String? = null,
@@ -71,7 +76,7 @@ data class User(
 	val id: Int? = null,
 
 	@field:SerializedName("delete_flag")
-	val deleteFlag: Any? = null,
+	val deleteFlag: @RawValue Any? = null,
 
 	@field:SerializedName("first_name")
 	val firstName: String? = null,
@@ -81,4 +86,4 @@ data class User(
 
 	@field:SerializedName("username")
 	val username: String? = null
-)
+) : Parcelable
