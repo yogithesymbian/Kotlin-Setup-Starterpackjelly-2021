@@ -86,7 +86,7 @@ class ScoreFragment : Fragment(), ScoreView {
     @SuppressLint("NotifyDataSetChanged")
     private suspend fun showScoreViewModel() {
         try {
-            // get history absen where no expired date
+
             withContext(Dispatchers.Main) {
                 scoreAdapter.notifyDataSetChanged()
                 rv_score.itemAnimator = DefaultItemAnimator()

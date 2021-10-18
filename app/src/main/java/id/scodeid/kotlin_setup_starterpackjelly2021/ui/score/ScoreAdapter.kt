@@ -34,6 +34,7 @@ class ScoreAdapter(
             //txt_name.text = item.name
             //item.image.let { Picasso.get().load(it).fit().into(img_main) }
             txt_score.text = item.score.toString()
+            txt_user.text = item.user?.username.toString()
             containerView.setOnClickListener { listener(item) }
 
         }
