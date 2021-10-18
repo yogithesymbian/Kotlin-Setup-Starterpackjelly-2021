@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:layout_marginBottom="50dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+<!--        <com.google.android.material.appbar.AppBarLayout-->
+<!--            android:id="@+id/app_bar_for_drawer"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@android:color/white"-->
+<!--            android:fitsSystemWindows="true"-->
+<!--            android:focusable="true"-->
+<!--            android:layout_margin="12dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
+
+<!--            <androidx.appcompat.widget.AppCompatTextView-->
+<!--                android:id="@+id/txt_hello_home"-->
+<!--                style="@style/TextAppearance.AppCompat.Headline"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="16dp"-->
+<!--                tools:text="home welcome" />-->
+
+<!--            <androidx.appcompat.widget.Toolbar-->
+<!--                android:id="@+id/toolbar_home"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="?attr/actionBarSize"-->
+<!--                android:layout_margin="4dp"-->
+<!--                android:background="@drawable/bg_black_rounded_10"-->
+<!--                android:fitsSystemWindows="true"-->
+<!--                android:visibility="visible"-->
+<!--                app:expandedTitleMarginStart="0dp"-->
+<!--                app:layout_collapseMode="pin"-->
+<!--                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"-->
+<!--                app:logo="@drawable/ic_unit"-->
+<!--                app:popupTheme="@style/AppTheme"-->
+<!--                app:titleTextAppearance="@style/TextAppearance.AppCompat.Body1"-->
+<!--                app:title="@string/fragment_home_search_cars"-->
+<!--                app:titleMarginStart="24dp"-->
+<!--                app:titleTextColor="#616161"-->
+<!--                tools:ignore="UnusedAttribute"-->
+<!--                tools:menu="@menu/toolbar_home" />-->
+
+<!--        </com.google.android.material.appbar.AppBarLayout>-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_list_category_cars"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="85dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/app_bar_for_drawer"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/app_bar_for_drawer"-->
+<!--            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            tools:listitem="@layout/item_list_category_cars" />-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_list_category_cars_result"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="210dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/rv_list_category_cars"-->
+<!--            tools:ignore="RtlSymmetry"-->
+<!--            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            tools:listitem="@layout/item_list_category_cars_result" />-->
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_score"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_scores" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

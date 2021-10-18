@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android-extensions'
 
 android {
 //    lintOptions {
@@ -62,6 +63,9 @@ android {
     }
     viewBinding {
         enabled = true
+    }
+    androidExtensions {
+        experimental = true
     }
 
 }

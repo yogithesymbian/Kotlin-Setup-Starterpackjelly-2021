@@ -16,6 +16,7 @@ class EndPoint {
          * authentication
          */
         const val AUTH_REGISTER = "${SERVER}api/auth/signup"
+        const val GET_SCORE = "${SERVER}api/score"
 //        const val AUTH_LOGIN = SERVER+"logindroid"
 //        const val ATUH_FORGOT_SEND_TOKEN = SERVER+"reset"
 //        const val ATUH_FORGOT_UPDATE = SERVER+"reset/password"

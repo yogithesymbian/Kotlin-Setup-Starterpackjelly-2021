@@ -16,6 +16,8 @@ import com.google.firebase.messaging.ktx.messaging
 import id.scodeid.kotlin_setup_starterpackjelly2021.databinding.ActivityMainBinding
 import id.scodeid.kotlin_setup_starterpackjelly2021.service.MyFirebaseMessagingService
 import id.scodeid.kotlin_setup_starterpackjelly2021.ui.auth.signin.LoginActivity
+import id.scodeid.kotlin_setup_starterpackjelly2021.ui.score.ScoreFragment
+import id.scodeid.kotlin_setup_starterpackjelly2021.ui.score.ScoreMainActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.txtHello.setOnClickListener {
             Log.d("test", "clicked")
-            startActivity(Intent(this.applicationContext, LoginActivity::class.java))
+            startActivity(Intent(this.applicationContext, ScoreMainActivity::class.java))
         }
 
         if (checkGooglePlayServices()) {
