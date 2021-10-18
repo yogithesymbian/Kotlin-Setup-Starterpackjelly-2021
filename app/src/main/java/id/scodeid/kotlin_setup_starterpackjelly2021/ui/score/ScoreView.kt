@@ -10,9 +10,9 @@ interface ScoreView {
     fun paginationTotalPageScoreView(totalPageDef: Int)
 
     fun showScoreView(
-        data: MutableList<ScoresItem>
+        data: MutableList<ScoresItem>?
     )
     fun showSingleScoreView(
-        data: ScoresItem
+        data: ScoresItem?
     )
 }

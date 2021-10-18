@@ -48,7 +48,7 @@ data class ScoresItem(
 data class Data(
 
 	@field:SerializedName("scores")
-	val scores: MutableList<ScoresItem>
+	val scores: MutableList<ScoresItem>? = null
 )
 
 @Parcelize

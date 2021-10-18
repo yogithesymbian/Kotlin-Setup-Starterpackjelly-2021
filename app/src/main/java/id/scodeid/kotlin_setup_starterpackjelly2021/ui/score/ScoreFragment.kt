@@ -129,15 +129,15 @@ class ScoreFragment : Fragment(), ScoreView {
         totalPageScoreAdapter = totalPageDef
     }
 
-    override fun showSingleScoreView(data: ScoresItem) {
+    override fun showSingleScoreView(data: ScoresItem?) {
         TODO("Not yet implemented")
     }
 
-    override fun showScoreView(data: MutableList<ScoresItem>) {
+    override fun showScoreView(data: MutableList<ScoresItem>?) {
         GlobalScope.launch {
             mutableList.clear()
             val assign = async {
-                data.let {
+                data?.let {
                     mutableList.addAll(it)
                 }
             }
