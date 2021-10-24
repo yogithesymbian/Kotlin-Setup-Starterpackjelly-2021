@@ -44,7 +44,7 @@ class ScoreViewModel(val view: ScoreView) : ViewModel() {
        )
 
         AndroidNetworking.get(EndPoint.GET_SCORE)
-                .addHeaders("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjM0NTQwMTA5LCJleHAiOjE3MjA5NDAxMDl9.NytBi_Dm3MIZwxVdhp400EnIXO4N3f5F-VX6PfhxWdc")
+                .addHeaders("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjM0NjE0NzE3LCJleHAiOjE3MjEwMTQ3MTd9.ApbRjb2nr1HFXgjYCcSpac87JR3ic4FbhDKANtFZX30")
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(object : JSONObjectRequestListener {
@@ -63,7 +63,7 @@ class ScoreViewModel(val view: ScoreView) : ViewModel() {
                                 response ${responseJson.await()}
                             """.trimIndent())
 
-                            val data = responseJson.await()?.data?.scores
+                            val data = responseJson.await()?.results
 
                             data?.let {
                                 view.showScoreView(it)
@@ -82,6 +82,8 @@ class ScoreViewModel(val view: ScoreView) : ViewModel() {
                     }
 
                     override fun onError(anError: ANError) {
+                        view.hideLoadingScoreView()
+                        Toast.makeText(context,"get scores failed", Toast.LENGTH_LONG).show()
                         if (anError.errorCode != 0) {
                             Log.d( TAG_LOG, "onError errorCode : ${anError.errorCode}")
                             Log.d( TAG_LOG, "onError errorBody : ${anError.errorBody}")

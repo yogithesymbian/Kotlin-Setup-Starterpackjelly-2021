@@ -19,19 +19,22 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.properties.Delegates
 import kotlinx.coroutines.*
-import id.scodeid.kotlin_setup_starterpackjelly2021.R
 import id.scodeid.kotlin_setup_starterpackjelly2021.data.network.response.score.ScoresItem
+import id.scodeid.kotlin_setup_starterpackjelly2021.databinding.FragmentScoreBinding
 import id.scodeid.kotlin_setup_starterpackjelly2021.ui.score.detail.ScoreDetailActivity
-import kotlinx.android.synthetic.main.fragment_score.*
+import id.scodeid.kotlin_setup_starterpackjelly2021.utils.gone
+import id.scodeid.kotlin_setup_starterpackjelly2021.utils.visible
 
 
 class ScoreFragment : Fragment(), ScoreView {
+
+    private lateinit var binding: FragmentScoreBinding
 
     private val observer =
         Observer<MutableList<ScoresItem>> { item ->
             if (item != null)
                 scoreAdapter.setData(item)
-//            pg_bar?.gone()
+            binding.pgBar.gone()
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +47,10 @@ class ScoreFragment : Fragment(), ScoreView {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_score, container, false)
+    ): View {
+//        return inflater.inflate(R.layout.fragment_score, container, false)
+        binding = FragmentScoreBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -66,7 +71,7 @@ class ScoreFragment : Fragment(), ScoreView {
     }
 
     private fun initListenerScoreAdapter() {
-        rv_score
+        binding.rvScore
             .addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
@@ -98,10 +103,10 @@ class ScoreFragment : Fragment(), ScoreView {
 
             withContext(Dispatchers.Main) {
                 scoreAdapter.notifyDataSetChanged()
-                rv_score.itemAnimator = DefaultItemAnimator()
-                rv_score.setHasFixedSize(true)
-                rv_score.layoutManager = LinearLayoutManager(requireContext())
-                rv_score.adapter = scoreAdapter
+                binding.rvScore.itemAnimator = DefaultItemAnimator()
+                binding.rvScore.setHasFixedSize(true)
+                binding.rvScore.layoutManager = LinearLayoutManager(requireContext())
+                binding.rvScore.adapter = scoreAdapter
             }
 
             val viewModel: ScoreViewModel by viewModels { ScoreViewModelFactory(this) }
@@ -118,11 +123,11 @@ class ScoreFragment : Fragment(), ScoreView {
     }
 
     override fun showLoadingScoreView() {
-//        pg_bar?.visible()
+        binding.pgBar.visible()
     }
 
     override fun hideLoadingScoreView() {
-//        pg_bar?.gone()
+        binding.pgBar.gone()
     }
 
     override fun paginationTotalPageScoreView(totalPageDef: Int) {

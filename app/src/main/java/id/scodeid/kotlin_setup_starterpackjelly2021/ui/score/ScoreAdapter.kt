@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.scodeid.kotlin_setup_starterpackjelly2021.R
 import id.scodeid.kotlin_setup_starterpackjelly2021.data.network.response.score.ScoresItem
+import id.scodeid.kotlin_setup_starterpackjelly2021.databinding.ItemScoresBinding
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_scores.*
 
 class ScoreAdapter(
     private val items: MutableList<ScoresItem>,
@@ -28,14 +28,16 @@ class ScoreAdapter(
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
         LayoutContainer {
+        private val binding = ItemScoresBinding.bind(containerView)
 
         fun bindItem(item: ScoresItem, listener: (ScoresItem) -> Unit) {
 
-            //txt_name.text = item.name
             //item.image.let { Picasso.get().load(it).fit().into(img_main) }
-            txt_score.text = item.score.toString()
-            txt_user.text = item.user?.username.toString()
-            containerView.setOnClickListener { listener(item) }
+            with(binding){
+                this.txtScore.text = item.score.toString()
+                this.txtUser.text = item.user?.username.toString()
+                containerView.setOnClickListener { listener(item) }
+            }
 
         }
 

@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+
+        <ProgressBar
+            android:id="@+id/pg_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 <!--        <com.google.android.material.appbar.AppBarLayout-->
 <!--            android:id="@+id/app_bar_for_drawer"-->
 <!--            android:layout_width="match_parent"-->
@@ -85,7 +96,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pg_bar"
             tools:listitem="@layout/item_scores" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

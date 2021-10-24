@@ -5,17 +5,27 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
+@Parcelize
 data class ScoreResponse(
-
-	@field:SerializedName("data")
-	val data: Data? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
 
+	@field:SerializedName("total_pages")
+	val totalPages: Int? = null,
+
 	@field:SerializedName("message")
-	val message: String? = null
-)
+	val message: String? = null,
+
+	@field:SerializedName("total_items")
+	val totalItems: Int? = null,
+
+	@field:SerializedName("results")
+	val results: MutableList<ScoresItem>? = null,
+
+	@field:SerializedName("current_page")
+	val currentPage: Int? = null
+) : Parcelable
 
 @Parcelize
 data class ScoresItem(
@@ -42,17 +52,11 @@ data class ScoresItem(
 	val questionId: Int? = null,
 
 	@field:SerializedName("user")
-	val user: User? = null
+	val user: UserData? = null
 ) : Parcelable
 
-data class Data(
-
-	@field:SerializedName("scores")
-	val scores: MutableList<ScoresItem>? = null
-)
-
 @Parcelize
-data class User(
+data class UserData(
 
 	@field:SerializedName("password")
 	val password: String? = null,

@@ -3,7 +3,7 @@ plugins {
     id 'kotlin-android'
 }
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 
 android {
 //    lintOptions {
@@ -38,7 +38,7 @@ android {
         versionName "1.0"
 
 //
-        buildConfigField "String", "BASE_URL", '"http://192.168.43.20:3001/"'
+        buildConfigField "String", "BASE_URL", '"http://192.168.216.190:3001/"'
 //        buildConfigField "String", "BASE_URL_ONLINE", '"http://47.254.248.35/api/api-remote-login-apps/public/"'
 //        buildConfigField "String", "API_TOKEN", '"bearer NExsTm5WT29zZ0RCczRoMkFuVnFJNHVVM3VLaFNERkJuWU9acUpOaA=="'
         multiDexEnabled true
@@ -60,12 +60,6 @@ android {
     }
     buildFeatures {
         viewBinding true
-    }
-    viewBinding {
-        enabled = true
-    }
-    androidExtensions {
-        experimental = true
     }
 
 }
