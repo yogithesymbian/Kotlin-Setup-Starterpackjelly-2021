@@ -39,7 +39,7 @@ class ScoreFragment : Fragment(), ScoreView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageScoreAdapter = 1
+        pageScoreAdapter = 0
         totalPageScoreAdapter = 0
     }
 
@@ -48,8 +48,10 @@ class ScoreFragment : Fragment(), ScoreView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        return inflater.inflate(R.layout.fragment_score, container, false)
         binding = FragmentScoreBinding.inflate(inflater, container, false)
+        GlobalScope.launch {
+            showScoreViewModel()
+        }
         return binding.root
     }
 
@@ -82,23 +84,16 @@ class ScoreFragment : Fragment(), ScoreView {
                     if (isLastPosition && pageScoreAdapter < totalPageScoreAdapter) {
                         pageScoreAdapter = pageScoreAdapter.plus(1)
                         val viewModel: ScoreViewModel by viewModels { ScoreViewModelFactory(this@ScoreFragment) }
-//                        viewModel.showScoreViewModel(requireContext(), pageScoreAdapter.toString())
-                        viewModel.showScoreViewModel(requireContext())
+                        Log.e(TAG_LOG, "page : $pageScoreAdapter")
+                        viewModel.showScoreViewModel(requireContext(), pageScoreAdapter.toString())
                     }
                 }
             })
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        GlobalScope.launch {
-            showScoreViewModel()
-        }
-    }
-
     @SuppressLint("NotifyDataSetChanged")
     private suspend fun showScoreViewModel() {
+        Log.d(TAG_LOG, "on showScoreViewModel()")
         try {
 
             withContext(Dispatchers.Main) {
@@ -113,9 +108,9 @@ class ScoreFragment : Fragment(), ScoreView {
 
             withContext(Dispatchers.Main) {
                 viewModel.liveData().observe(viewLifecycleOwner, observer)
+                Log.e(TAG_LOG, "page : $pageScoreAdapter")
                 if (scoreAdapter.itemCount == 0)
-                    viewModel.showScoreViewModel(requireContext())
-//                    viewModel.showScoreViewModel(requireContext(), pageScoreAdapter.toString())
+                    viewModel.showScoreViewModel(requireContext(), pageScoreAdapter.toString())
             }
         } catch (e: Exception) {
             Log.d(TAG_LOG, "exception request ${e.printStackTrace()}")
@@ -134,21 +129,21 @@ class ScoreFragment : Fragment(), ScoreView {
         totalPageScoreAdapter = totalPageDef
     }
 
-    override fun showSingleScoreView(data: ScoresItem?) {
-        TODO("Not yet implemented")
-    }
+//    override fun showSingleScoreView(data: ScoresItem?) {
+//        TODO("Not yet implemented")
+//    }
 
-    override fun showScoreView(data: MutableList<ScoresItem>?) {
-        GlobalScope.launch {
-            mutableList.clear()
-            val assign = async {
-                data?.let {
-                    mutableList.addAll(it)
-                }
-            }
-            assign.await()
-        }
-    }
+//    override fun showScoreView(data: MutableList<ScoresItem>?) {
+//        GlobalScope.launch {
+//            mutableList.clear()
+//            val assign = async {
+//                data?.let {
+//                    mutableList.addAll(it)
+//                }
+//            }
+//            assign.await()
+//        }
+//    }
 
     companion object {
         val TAG_LOG: String = ScoreFragment::class.java.simpleName

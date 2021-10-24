@@ -30,7 +30,8 @@ class ScoreViewModel(val view: ScoreView) : ViewModel() {
     }
 
     fun showScoreViewModel(
-            context: Context
+            context: Context,
+            page: String
     ) {
         
         view.showLoadingScoreView()
@@ -45,6 +46,9 @@ class ScoreViewModel(val view: ScoreView) : ViewModel() {
 
         AndroidNetworking.get(EndPoint.GET_SCORE)
                 .addHeaders("x-access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjM0NjE0NzE3LCJleHAiOjE3MjEwMTQ3MTd9.ApbRjb2nr1HFXgjYCcSpac87JR3ic4FbhDKANtFZX30")
+                // .addPathParameter("page", page)
+                .addQueryParameter("page", page)
+                .addQueryParameter("size", "5")
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsJSONObject(object : JSONObjectRequestListener {
@@ -66,7 +70,7 @@ class ScoreViewModel(val view: ScoreView) : ViewModel() {
                             val data = responseJson.await()?.results
 
                             data?.let {
-                                view.showScoreView(it)
+//                                view.showScoreView(it)
                                 mutableLiveData.postValue(it)
                             }
 
@@ -76,7 +80,7 @@ class ScoreViewModel(val view: ScoreView) : ViewModel() {
                             }
 
 
-                            view.paginationTotalPageScoreView(response.optInt("total_page"))
+                            view.paginationTotalPageScoreView(response.optInt("total_pages"))
                         }
 
                     }

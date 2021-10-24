@@ -21,7 +21,7 @@ class ScoreAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun setData(itemsData: MutableList<ScoresItem>) {
-        items.clear()
+//        items.clear()
         items.addAll(itemsData)
         notifyDataSetChanged()
     }
